@@ -7,20 +7,24 @@ import pickle
 import re
 from collections import Counter
 
-import textract
+import PyPDF2
 import watson_developer_cloud.natural_language_understanding.features.v1 as Features
 from watson_developer_cloud import NaturalLanguageUnderstandingV1
 
-import scrap
+from web_app import scrap
 
 
 def get_text_from_pdf(file_path):
-    text = textract.process(file_path)
+
+    pdfFileObj = open(file_path,'rb')
+    pdfReader = PyPDF2.PdfFileReader(pdfFileObj)
+    pageObj = pdfReader.getPage(0)
+    text = pageObj.extractText()
     text = str(text)
     return text
 
 
-path = 'C:\\Users\\Mukund\\Downloads\\findMyAdvisor\\findMyAdvisor\\data\\'
+path = 'C:\\Users\\Mukund\\PycharmProjects\\FindViser\\data\\'
 natural_language_understanding = NaturalLanguageUnderstandingV1(
     version='2017-02-27',
     username='dfcd8207-3f34-411b-b149-7351921f3e1c',
@@ -41,7 +45,7 @@ def load_obj(name):
 
 # TODO change path
 def get_features_prof():
-    list_profs = glob.glob("C:\\Users\\Mukund\\Downloads\\findMyAdvisor\\findMyAdvisor\\prof_pages\\*")
+    list_profs = glob.glob("C:\\Users\\Mukund\\PycharmProjects\\FindViser\\prof_pages\\*")
     dict_prof_bow = {}
     dict_prof_concept = {}
     for profs in list_profs:
@@ -137,7 +141,7 @@ def get_top_n_prof(n, dict_prof_bow, feature_resume):
 def get_names_prof(list_recommended_prof):
     list_profs = []
     for _, j in list_recommended_prof:
-        list_profs.append(j)
+        list_profs.append(os.path.basename(j))
     return list_profs
 
 
@@ -179,7 +183,6 @@ def return_json(path_to_file):
                    'dict_link': dict_link, 'dict_cite': dict_cite}
 
     # print dict_result
-    print(dict_result)
     json_data = json.dumps(dict_result)
     json.dump(dict_result, open(path + "json_data.json", 'w'))
     return json_data
