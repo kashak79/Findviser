@@ -1,5 +1,5 @@
 # encoding=utf8
-import urllib2
+import urllib.request as urllib2
 from bs4 import BeautifulSoup
 import re
 import requests
