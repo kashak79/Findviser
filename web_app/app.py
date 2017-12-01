@@ -1,22 +1,19 @@
 from flask import Flask, render_template, request, redirect, url_for
 import json
-import get_features
+from web_app import get_features
 from werkzeug import security
 
 app = Flask(__name__)
 
-pdf_path = '/home/shaurya/PycharmProjects/findMyAdvisor/pdf/'
-
+pdf_path = 'C:\\Users\\Mukund\\PycharmProjects\\FindViser\\pdf\\'
 
 @app.route("/")
 def index():
     return "Welcome!"
 
-
 @app.route("/home")
 def home():
     return render_template('startbootstrap-landing-page-gh-pages/index.html')
-
 
 @app.route('/searchresults', methods=['POST'])
 def handle_data():
