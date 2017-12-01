@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Landing Page - Start Bootstrap Theme</title>
+    <title>FindViser</title>
 
     <!-- Bootstrap core CSS -->
     <link href="{{url_for('static',filename='styles/bootstrap.min.css')}}" rel="stylesheet">
@@ -40,6 +40,10 @@
             position: absolute;
         }
 
+        .intro-message {
+            margin-left: 30%
+        }
+
     </style>
     <script>
 
@@ -51,7 +55,7 @@
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
     <div class="container">
-        <a class="navbar-brand" href="#">Start Bootstrap</a>
+        <a class="navbar-brand" href="#">FindViser</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
                 aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -76,16 +80,15 @@
 <header class="intro-header">
     <div class="container">
         <div class="intro-message col-sm-12">
+            <p style="color: white; text-align: left">Upload your resume and find faculty whose interests match yours</p>
             <form action="{{ url_for('handle_data') }}" method="post">
                 <div class="col-sm-5">
-                    <!--<textarea rows="15" cols="50" name="projectFilepath">
-                        Paste the text of your resume here
-                    </textarea>-->
                     <div class="form-group">
                         <input type="file" name="img[]" class="file">
                         <div class="input-group col-xs-12">
+
                             <span class="input-group-addon"><i class="glyphicon glyphicon-picture"></i></span>
-                            <input type="text" class="form-control input-lg" disabled placeholder="Upload Image">
+                            <input type="text" class="form-control input-lg" disabled placeholder="Upload a PDF of your Resume">
                             <span class="input-group-btn">
         <button class="browse btn btn-primary input-lg" type="button"><i class="glyphicon glyphicon-search"></i> Browse</button>
       </span>
@@ -93,7 +96,7 @@
                     </div>
                 </div>
                 <div class="col-sm-5">
-                    <button type="submit" class="button">Button</button>
+                    <button type="submit" class="button">Find an Advisor</button>
                 </div>
             </form>
         </div>
